@@ -3,13 +3,14 @@ import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
 import slugify from "slugify";
 import BoardAdderContainer from "../../containers/Home/BoardAdderContainer";
+import Header from "../Header/Header";
 
 const Home = ({ boards }) => {
   if (!boards) return;
 
   return (
     <>
-      {/* <Header /> */}
+      <Header />
       <HomeWrapper>
         <MainContent>
           <h1>Boards</h1>

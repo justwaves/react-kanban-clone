@@ -1,52 +1,49 @@
-import React from 'react';
-import styled, {css} from 'styled-components';
-import { useSelector } from 'react-redux';
+import React from "react";
+import { Link } from "react-router-dom";
+import styled, { css } from "styled-components";
+import { useSelector } from "react-redux";
 
 const Header = () => {
-  const { user } = useSelector(({user}) => ({
-    user: user.user
-  }))
+  const { user } = useSelector(({ user }) => ({
+    user: user.user,
+  }));
 
   return (
-    <header>
-      <Link to="/" className="header-title">
+    <HeaderWrapper>
+      <HeaderTitle to="/">
         {/* <img src={kanbanLogo} alt="React Kanban logo" /> */}
         &nbsp;React Kanban
-      </Link>
-      <div className="header-right-side">
+      </HeaderTitle>
+      <HeaderRightSide>
         {user ? (
-          <img
+          <UserThumbnail
             src={user.imageUrl}
             alt={user.name}
-            className="user-thumbnail"
             title={user.name}
           />
         ) : (
-          // <FaUserSecret className="guest-icon" />
+          <GuestIcon>Guest</GuestIcon>
         )}
         {user ? (
-          <a className="signout-link" href="/auth/signout">
-            {/* <FaSignOut className="signout-icon" /> */}
+          <SignoutLink href="/auth/signout">
+            <SignoutIcon>sign out</SignoutIcon>
             &nbsp;Sign out
-          </a>
+          </SignoutLink>
         ) : (
-          <a className="signout-link" href="/">
-            {/* <FaSignIn className="signout-icon" /> */}
+          <SignoutLink href="/">
+            <SignoutIcon>sign out</SignoutIcon>
             &nbsp;Sign in
-          </a>
+          </SignoutLink>
         )}
-      </div>
-    </header>
+      </HeaderRightSide>
+    </HeaderWrapper>
   );
 };
- 
 
 export default Header;
- 
 
-const HeaderWrapper = styled.div`
-
-position: fixed;
+const HeaderWrapper = styled.header`
+  position: fixed;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -58,14 +55,9 @@ position: fixed;
   background: #555;
   z-index: 2;
   transition: background 0.3s;
-  
-  ${props => props.color && css`
-  
-  `}
- 
 
-  `
- 
+  ${(props) => props.color && css``}
+`;
 
 const HeaderTitle = styled(Link)`
   display: inline-flex;
@@ -76,9 +68,9 @@ const HeaderTitle = styled(Link)`
   text-decoration: none;
 
   img {
-  height: 30px;
-}
-`  
+    height: 30px;
+  }
+`;
 
 const HeaderRightSide = styled.div`
   display: flex;
@@ -87,19 +79,19 @@ const HeaderRightSide = styled.div`
   box-sizing: border-box;
   height: 100%;
   color: white;
-`
- 
-const UserThumbnail  = styled.div`
- height: 28px;
+`;
+
+const UserThumbnail = styled.img`
+  height: 28px;
   border-radius: 3px;
-`
+`;
 
 const GuestIcon = styled.div`
   padding-top: 2px;
   font-size: 24px;
-`
- 
-const SignoutLink = styled.div`
+`;
+
+const SignoutLink = styled.a`
   padding: 3px 5px 1px 5px;
   margin-left: 12px;
   border: 1px solid rgba(0, 0, 0, 0.2);
@@ -109,16 +101,16 @@ const SignoutLink = styled.div`
   text-decoration: none;
 
   &:focus,
-&:hover {
-  background: rgba(0, 0, 0, 0.5);
-}
-`
- 
+  &:hover {
+    background: rgba(0, 0, 0, 0.5);
+  }
+`;
+
 const SignoutIcon = styled.div`
- padding-bottom: 2px;
+  padding-bottom: 2px;
   font-size: 22px;
-`
- 
+`;
+
 // @media (max-width: 700px) {
 //   .user-thumbnail,
 //   .guest-icon {

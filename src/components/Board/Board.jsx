@@ -3,6 +3,7 @@ import styled, { css } from "styled-components";
 import PropTypes from "prop-types";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import List from "../List/List";
+import Header from "../Header/Header";
 
 const BoardWrapper = styled.div`
   display: inline-flex;
@@ -57,6 +58,7 @@ const Board = ({
   return (
     <>
       <BoardWrapper>
+        <Header />
         {/* <BoardHeader /> */}
         <ListWrapper onMouseDown={handleMouseDown} onWheel={handleWheel}>
           <DragDropContext onDragEnd={handleDragEnd}>
